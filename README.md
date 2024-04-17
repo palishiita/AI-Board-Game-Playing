@@ -1,6 +1,6 @@
 # AI BOARD GAME REVERSI
 
-![Alt text](image.png){:width="25px" height="25px"}
+![Alt text](image.png)
 
 
 ## Background about Reversi
@@ -61,6 +61,32 @@ ii) The board is full.
 
 ## Min Max Algorithm
 
+**MiniMax Class**
+- **Purpose**: Implements the MiniMax algorithm for decision-making in the game of Reversi/Othello.
+- **Initialization**: Initializes the MiniMax player with parameters such as player color, maximum search depth, and a heuristic strategy for evaluating game states.
+- **Functionality**:
+  - `make_move`: Determines the best move for the player using MiniMax algorithm up to the specified depth.
+  - `maximize` and `minimize`: Recursive functions for exploring game tree, maximizing player's score and minimizing opponent's score, respectively.
+
 ## Alpha Beta Prunning
 
-## ReversiAI
+**AlphaBetaPlayer Class**
+- **Purpose**: Extends `MiniMaxPlayer` to implement the Alpha-Beta Pruning algorithm, optimizing the search process.
+- **Initialization**: Inherits parameters from `MiniMaxPlayer` and adds a list of heuristic strategies.
+- **Functionality**:
+  - `get_best_move`: Overrides `make_move` to find the best move using Alpha-Beta algorithm.
+  - `max_value` and `min_value`: Implement Alpha-Beta pruning for maximizing efficiency.
+  - `evaluate`: Evaluates the current game state using a specified heuristic strategy.
+
+
+## Reversi AI
+- **Purpose**: Implements the Reversi game GUI incorporating game logic and AI players.
+- **Initialization**: Sets up the tkinter window and frames for the game board and piece counts. Initializes the game, heuristic evaluators, and AlphaBetaPlayers for both players.
+- **Functionality**:
+  - `draw_board`: Draws the game board on the canvas using rectangles and fills them with pieces if present.
+  - `draw_piece`: Draws a piece (white or black) at the specified row and column.
+  - `update_counts`: Updates and displays the count of white and black pieces.
+  - `update_board`: Updates the board and counts after each move.
+  - `play_game`: Manages the game loop where players take turns to make moves until the game ends.
+ 
+For both the `AlphaBetaPlayer` Class and `MiniMax` Class deep copy was used. Enables deep copying of game states to ensure the original game state remains unchanged during search. Utilizes the `copy.deepcopy` function to create copies of game states before making and evaluating potential moves.
