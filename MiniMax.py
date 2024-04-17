@@ -1,6 +1,15 @@
 import copy
 
+"""
+
+"""
+
 class MiniMaxPlayer:
+    """
+    player_color: The color of the player (1 for white, 2 for black).
+    max_depth: The maximum depth to search in the game tree during minimax algorithm.
+    heuristic_strategy: The heuristic function used to evaluate game states
+    """
     def __init__(self, player_color, max_depth, heuristic_strategy):
         self.player_color = player_color
         self.max_depth = max_depth
@@ -10,6 +19,12 @@ class MiniMaxPlayer:
         _, move = self.maximize(copy.deepcopy(self.game), self.max_depth, float('-inf'), float('inf'))
         return move
 
+    """
+    game: The current game state.
+    depth: The current depth in the game tree.
+    alpha: The best score that the maximizing player can achieve.
+    beta: The best score that the minimizing player can achieve.
+    """
     def maximize(self, game, depth, alpha, beta):
         if depth == 0 or game.is_terminal_state():
             return self.heuristic_strategy(game), None
