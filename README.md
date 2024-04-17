@@ -1,4 +1,4 @@
-# AI BOARD GAME REVERSI
+# AI VS AI BOARD GAME PLAY REVERSI
 
 ![Alt text](image.png)
 
