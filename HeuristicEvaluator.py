@@ -3,9 +3,13 @@ class HeuristicEvaluator:
     def __init__(self, player_color):
         self.player_color = player_color
 
+    """
+    Heuristic Strategies
+    """
+
     def heuristic_strategy_1(self, game):
         """
-        Heuristic Strategy 1: Coin Parity
+        Heuristic Strategy 1: Coin Parity: Calculates the difference between the number of player's disks and opponent's disks on the board.
         """
         max_score = sum(row.count(self.player_color) for row in game.board)
         min_score = sum(row.count(3 - self.player_color) for row in game.board)
@@ -13,7 +17,7 @@ class HeuristicEvaluator:
 
     def heuristic_strategy_2(self, game):
         """
-        Heuristic Strategy 2: Mobility
+        Heuristic Strategy 2: Mobility: Measures the difference between the number of valid moves available to the player and the opponent.
         """
         max_mobility = len(game.get_valid_moves(self.player_color))
         min_mobility = len(game.get_valid_moves(3 - self.player_color))
@@ -21,7 +25,7 @@ class HeuristicEvaluator:
 
     def heuristic_strategy_3(self, game):
         """
-        Heuristic Strategy 3: Mobility and Corners
+        Heuristic Strategy 3: Mobility and Corners: Combines mobility with the count of player's disks in the corner cells to prioritize corner occupation.
         """
         max_mobility = len(game.get_valid_moves(self.player_color))
         min_mobility = len(game.get_valid_moves(3 - self.player_color))
@@ -33,7 +37,8 @@ class HeuristicEvaluator:
 
     def heuristic_strategy_4(self, game):
         """
-        Heuristic Strategy 4: Mobility and Stability
+        Heuristic Strategy 4: Mobility and Stability: Incorporates mobility with the stability of player's disks to prefer stable configurations.  
+        A "stable configuration" refers to a pattern of disks on the board that cannot be flipped by the opponent's moves 
         """
         max_mobility = len(game.get_valid_moves(self.player_color))
         min_mobility = len(game.get_valid_moves(3 - self.player_color))
@@ -45,7 +50,9 @@ class HeuristicEvaluator:
 
     def heuristic_strategy_5(self, game):
         """
-        Heuristic Strategy 5: Mobility, Corners, and Edges
+        Heuristic Strategy 5: Mobility, Corners, and Edges: Extends the considerations to include the number of player's disks on the edges, in addition to mobility and corners.
+        Having a presence on the edges provides opportunities for expanding the player's influence toward the center of the board. 
+        Disks placed strategically along the edges can serve as anchor points for building territories and exerting pressure on the opponent's positions.
         """
         max_mobility = len(game.get_valid_moves(self.player_color))
         min_mobility = len(game.get_valid_moves(3 - self.player_color))
@@ -77,6 +84,10 @@ class HeuristicEvaluator:
         min_stability = self.calculate_stability(game, 3 - self.player_color)
 
         return (max_mobility + max_corners + max_edges + max_stability) - (min_mobility + min_corners + min_edges + min_stability)
+
+    """
+    Helper functions
+    """
 
     def calculate_edges(self, game, player_color):
         """
